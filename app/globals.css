@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- THEME VARIABLES ---------- */
+:root {
+  --bg: 245 246 248;
+  --card: 255 255 255;
+  --surface: 235 237 240;
+  --line: 0 0 0;
+  --ink: 17 17 17;
+  --muted: 107 114 128;
+}
+
+.dark {
+  --bg: 10 10 10;
+  --card: 20 20 20;
+  --surface: 5 5 9;
+  --line: 255 255 255;
+  --ink: 249 250 251;
+  --muted: 156 163 175;
+}
+
+/* ---------- RESET ---------- */
+* {
+  @apply antialiased;
+}
+
+html, body {
+  @apply bg-bg text-ink min-h-screen;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---------- SELECTION ---------- */
+::selection {
+  background: #00bfff;
+  color: #000;
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--line) / 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--muted) / 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--muted) / 0.5);
+}
+
+/* ---------- TITLES ---------- */
+h1, h2, h3, h4 {
+  @apply tracking-tight font-semibold;
+}
+
+/* ---------- LINKS ---------- */
+a {
+  @apply transition-colors duration-200;
+}
+
+/* ---------- CARDS ---------- */
+.card {
+  @apply bg-card border border-line/10 rounded-xl p-5 transition-all duration-300;
+}
+.card:hover {
+  @apply border-primary/40;
+}
+
+/* ---------- BADGES ---------- */
+.badge {
+  @apply text-xs px-2 py-1 rounded-full bg-line/10 text-muted;
+}
+
+/* ---------- GRID SPACING ---------- */
+.section {
+  @apply space-y-4;
+}
+.section-title {
+  @apply text-xl font-semibold tracking-tight;
+}
+
+/* ---------- BUTTONS ---------- */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-black hover:opacity-90 transition;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-lg border border-line/10 px-4 py-2 text-sm font-medium text-ink hover:bg-line/5 transition;
+}
