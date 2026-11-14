@@ -1,3 +1,5 @@
+import SpotlightCard from "@/Components/SpotlightCard";
+
 interface PickCardProps {
   match: string;
   league: string;
@@ -18,7 +20,7 @@ export default function PickCard({
   cat,
 }: PickCardProps) {
   return (
-    <div className="bg-card border border-line/10 rounded-3xl p-5 flex flex-col gap-2 hover:border-primary/40 transition">
+    <SpotlightCard className="rounded-3xl p-5 flex flex-col gap-2">
       <div className="text-xs text-primary font-bold">{cat}</div>
 
       <h3 className="font-black text-lg text-ink">{match}</h3>
@@ -34,6 +36,6 @@ export default function PickCard({
           Confiance : {conf}/5
         </span>
       </div>
-    </div>
+    </SpotlightCard>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import SpotlightCard from "@/Components/SpotlightCard";
 
 interface Result {
   id: string;
@@ -55,8 +56,8 @@ export default function ResultatsPage() {
         <p className="text-muted">Chargement...</p>
       ) : (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            <div className="bg-card border border-line/10 rounded-2xl p-4 sm:p-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4" data-animate-group>
+            <SpotlightCard className="rounded-2xl p-4 sm:p-5">
               <div className="text-xs text-muted">PARIS VALIDÉS</div>
               <div className="text-xl sm:text-2xl font-black text-ink">{done}</div>
               {pending > 0 && (
@@ -64,20 +65,20 @@ export default function ResultatsPage() {
                   {pending} en attente
                 </div>
               )}
-            </div>
-            <div className="bg-card border border-line/10 rounded-2xl p-4 sm:p-5">
+            </SpotlightCard>
+            <SpotlightCard className="rounded-2xl p-4 sm:p-5">
               <div className="text-xs text-muted">WIN RATE</div>
               <div className="text-xl sm:text-2xl font-black text-primary">
                 {winRate}%
               </div>
-            </div>
-            <div className="bg-card border border-line/10 rounded-2xl p-4 sm:p-5">
+            </SpotlightCard>
+            <SpotlightCard className="rounded-2xl p-4 sm:p-5">
               <div className="text-xs text-muted">GAGNÉS / PERDUS</div>
               <div className="text-xl sm:text-2xl font-black text-ink">
                 {wins} / {losses}
               </div>
-            </div>
-            <div className="bg-card border border-line/10 rounded-2xl p-4 sm:p-5">
+            </SpotlightCard>
+            <SpotlightCard className="rounded-2xl p-4 sm:p-5">
               <div className="text-xs text-muted">ROI</div>
               <div
                 className={`text-xl sm:text-2xl font-black ${
@@ -87,7 +88,7 @@ export default function ResultatsPage() {
                 {Number(roi) >= 0 ? "+" : ""}
                 {roi}%
               </div>
-            </div>
+            </SpotlightCard>
           </div>
 
           {results.length > 0 ? (

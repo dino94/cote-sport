@@ -91,3 +91,138 @@ a {
 .btn-secondary {
   @apply inline-flex items-center justify-center rounded-lg border border-line/10 px-4 py-2 text-sm font-medium text-ink hover:bg-line/5 transition;
 }
+
+/* ---------- 21ST-INSPIRED INTERACTIONS ---------- */
+.btn-premium,
+button.bg-primary,
+a.bg-primary {
+  box-shadow: 0 8px 26px rgb(0 191 255 / 0.14), inset 0 1px 0 rgb(255 255 255 / 0.18);
+  transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+}
+
+.btn-premium:hover,
+button.bg-primary:hover,
+a.bg-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgb(0 191 255 / 0.24), inset 0 1px 0 rgb(255 255 255 / 0.2);
+}
+
+.btn-premium:active,
+button.bg-primary:active,
+a.bg-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-premium:focus-visible,
+button.bg-primary:focus-visible,
+a.bg-primary:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid #00bfff;
+  outline-offset: 3px;
+}
+
+.spotlight-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgb(var(--line) / 0.1);
+  background: rgb(var(--card));
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+.spotlight-card::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    rgb(0 191 255 / 0.12),
+    transparent 72%
+  );
+  content: "";
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.spotlight-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-2px);
+  border-color: rgb(0 191 255 / 0.35);
+  box-shadow: 0 14px 36px rgb(0 191 255 / 0.08);
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.nav-link {
+  position: relative;
+  border-radius: 9999px;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.nav-link[aria-current="page"] {
+  background: rgb(0 191 255 / 0.1);
+  color: rgb(var(--ink));
+}
+
+.nav-link[aria-current="page"]::after {
+  position: absolute;
+  right: 12px;
+  bottom: 4px;
+  left: 12px;
+  height: 2px;
+  border-radius: 9999px;
+  background: #00bfff;
+  content: "";
+}
+
+.text-shimmer > span:not(.sr-only) > span {
+  background: linear-gradient(110deg, #00bfff 15%, #b8f1ff 48%, #0095cc 72%, #00bfff 90%);
+  background-size: 220% 100%;
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: coteflex-text-sheen 7s ease-in-out infinite;
+}
+
+@keyframes coteflex-text-sheen {
+  0%, 100% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-premium,
+  button.bg-primary,
+  a.bg-primary,
+  .spotlight-card,
+  .nav-link {
+    transition: none;
+  }
+
+  .btn-premium:hover,
+  button.bg-primary:hover,
+  a.bg-primary:hover,
+  .spotlight-card:hover {
+    transform: none;
+  }
+
+  .spotlight-card::before {
+    display: none;
+  }
+
+  .text-shimmer > span:not(.sr-only) > span {
+    animation: none;
+    background-position: 50% 0;
+  }
+}

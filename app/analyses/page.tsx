@@ -5,6 +5,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth-context";
 import AnalysisCard from "@/Components/AnalysisCard";
+import SpotlightCard from "@/Components/SpotlightCard";
 
 interface Analysis {
   id: string;
@@ -47,7 +48,7 @@ export default function AnalysesPage() {
         <p className="text-muted">Chargement...</p>
       ) : analyses.length > 0 ? (
         <>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4" data-animate-group>
             {analyses.map((a) => (
               <AnalysisCard
                 key={a.id}
@@ -61,7 +62,7 @@ export default function AnalysesPage() {
             ))}
           </div>
           {!isSubscriber && (
-            <div className="bg-card border border-line/10 rounded-3xl p-8 text-center max-w-lg mx-auto mt-6">
+            <SpotlightCard className="rounded-3xl p-8 text-center max-w-lg mx-auto mt-6">
               <h2 className="text-xl font-black mb-2 text-ink">Accédez à toutes les analyses</h2>
               <p className="text-muted text-sm mb-6">
                 Inscrivez-vous gratuitement pour voir l&apos;intégralité de nos analyses statistiques.
@@ -74,7 +75,7 @@ export default function AnalysesPage() {
                   S&apos;inscrire gratuitement
                 </Link>
               </div>
-            </div>
+            </SpotlightCard>
           )}
         </>
       ) : (

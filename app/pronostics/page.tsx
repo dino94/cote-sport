@@ -5,6 +5,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth-context";
 import PickCard from "@/Components/PickCard";
+import SpotlightCard from "@/Components/SpotlightCard";
 
 interface Pick {
   id: string;
@@ -84,7 +85,7 @@ export default function PronosticsPage() {
         <p className="text-muted">Chargement...</p>
       ) : picks.length > 0 ? (
         <>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4" data-animate-group>
             {picks.map((p) => (
               <PickCard
                 key={p.id}
@@ -99,7 +100,7 @@ export default function PronosticsPage() {
             ))}
           </div>
           {!session && (
-            <div className="bg-card border border-line/10 rounded-3xl p-8 text-center max-w-lg mx-auto mt-6">
+            <SpotlightCard className="rounded-3xl p-8 text-center max-w-lg mx-auto mt-6">
               <h2 className="text-xl font-black mb-2 text-ink">Accédez à tous les pronostics</h2>
               <p className="text-muted text-sm mb-6">
                 Inscrivez-vous gratuitement pour voir l&apos;intégralité de nos pronostics value.
@@ -112,7 +113,7 @@ export default function PronosticsPage() {
                   S&apos;inscrire gratuitement
                 </Link>
               </div>
-            </div>
+            </SpotlightCard>
           )}
         </>
       ) : (

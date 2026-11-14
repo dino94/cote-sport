@@ -4,6 +4,8 @@ import Footer from "@/Components/Footer";
 import { AuthProvider } from "@/lib/auth-context";
 import { ThemeProvider } from "@/lib/theme-context";
 import ServiceWorkerRegister from "@/Components/ServiceWorkerRegister";
+import LenisProvider from "@/Components/LenisProvider";
+import GsapProvider from "@/Components/GsapProvider";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -43,6 +45,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="bg-bg text-ink">
+        <LenisProvider />
+        <GsapProvider />
         <ThemeProvider>
           <AuthProvider>
             <Header />

@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react";
 import AnalysisCard from "@/Components/AnalysisCard";
 import PickCard from "@/Components/PickCard";
+import Aurora from "@/Components/Aurora";
+import BlurText from "@/Components/BlurText";
+import Magnet from "@/Components/Magnet";
+import SpotlightCard from "@/Components/SpotlightCard";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth-context";
@@ -90,49 +94,104 @@ export default function Home() {
     <>
       <section className="grid lg:grid-cols-12 gap-6">
         <div className="lg:col-span-7 bg-card border border-line/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-7 lg:p-10 relative overflow-hidden">
+          <Aurora
+            colorStops={["#00BFFF", "#0095CC", "#00BFFF"]}
+            amplitude={0.8}
+            blend={0.55}
+            speed={0.35}
+            layers={2}
+            glow={0.45}
+            opacity={0.7}
+            className="pointer-events-none"
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 0,
+              opacity: 0.28,
+              pointerEvents: "none",
+            }}
+          />
           <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary/10 blur-[80px] rounded-full" />
 
-          <span className="inline-flex text-xs font-black tracking-widest text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">
-            ● CONSEIL INDÉPENDANT DEPUIS 2022
-          </span>
+          <div className="relative z-10">
+            <span className="inline-flex text-xs font-black tracking-widest text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">
+              ● CONSEIL INDÉPENDANT DEPUIS 2022
+            </span>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-[52px] font-black leading-[0.9] tracking-tighter mt-5 text-ink">
-            La data<br />
-            <span className="text-primary">bat l&apos;intuition.</span>
-          </h1>
+            <h1 className="text-3xl sm:text-4xl lg:text-[52px] font-black leading-[0.9] tracking-tighter mt-5 text-ink">
+              <span className="block">
+                <BlurText
+                  text="La data"
+                  animateBy="words"
+                  direction="bottom"
+                  distance={18}
+                  blur={8}
+                  delay={140}
+                  className="text-ink"
+                />
+              </span>
+              <span className="block">
+                <BlurText
+                  text="bat l'intuition."
+                  animateBy="words"
+                  direction="bottom"
+                  distance={18}
+                  blur={8}
+                  delay={140}
+                  className="text-shimmer"
+                />
+              </span>
+            </h1>
 
-          <p className="text-muted mt-4 leading-relaxed">
-            Service de conseil en paris sportifs. Analyses statistiques football, NBA, tennis.
-            Zéro pari plaisir, 100% value bet et gestion stricte de la bankroll.
-          </p>
+            <p className="text-muted mt-4 leading-relaxed">
+              Service de conseil en paris sportifs. Analyses statistiques football, NBA, tennis.
+              Zéro pari plaisir, 100% value bet et gestion stricte de la bankroll.
+            </p>
 
-          <div className="flex flex-wrap gap-3 mt-7">
-            <Link
-              href="/analyses"
-              className="bg-primary text-black px-5 sm:px-7 py-3 sm:py-3.5 rounded-full font-black hover:opacity-90 transition text-sm sm:text-base"
-            >
-              Voir les analyses →
-            </Link>
-            <Link
-              href="/pronostics"
-              className="bg-ink text-bg px-5 sm:px-7 py-3 sm:py-3.5 rounded-full font-black hover:opacity-90 transition text-sm sm:text-base"
-            >
-              Découvrir les pronostics
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-line/10">
-            <div>
-              <div className="text-xl sm:text-2xl font-black text-ink">+{roi}%</div>
-              <div className="text-[11px] font-bold text-muted">ROI GLOBAL</div>
+            <div className="flex flex-wrap gap-3 mt-7">
+              <Magnet
+                padding={42}
+                magnetStrength={6}
+                maxOffset={8}
+                scale={1.03}
+                wrapperClassName="inline-block"
+              >
+                <Link
+                  href="/analyses"
+                  className="btn-premium inline-flex bg-primary text-black px-5 sm:px-7 py-3 sm:py-3.5 rounded-full font-black hover:opacity-90 transition text-sm sm:text-base"
+                >
+                  Voir les analyses →
+                </Link>
+              </Magnet>
+              <Magnet
+                padding={42}
+                magnetStrength={6}
+                maxOffset={8}
+                scale={1.03}
+                wrapperClassName="inline-block"
+              >
+                <Link
+                  href="/pronostics"
+                  className="btn-premium inline-flex bg-ink text-bg px-5 sm:px-7 py-3 sm:py-3.5 rounded-full font-black hover:opacity-90 transition text-sm sm:text-base"
+                >
+                  Découvrir les pronostics
+                </Link>
+              </Magnet>
             </div>
-            <div>
-              <div className="text-xl sm:text-2xl font-black text-ink">{winRate}%</div>
-              <div className="text-[11px] font-bold text-muted">WIN RATE</div>
-            </div>
-            <div>
-              <div className="text-xl sm:text-2xl font-black text-ink">{avgCote}</div>
-              <div className="text-[11px] font-bold text-muted">COTE MOY.</div>
+
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-line/10">
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-ink">+{roi}%</div>
+                <div className="text-[11px] font-bold text-muted">ROI GLOBAL</div>
+              </div>
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-ink">{winRate}%</div>
+                <div className="text-[11px] font-bold text-muted">WIN RATE</div>
+              </div>
+              <div>
+                <div className="text-xl sm:text-2xl font-black text-ink">{avgCote}</div>
+                <div className="text-[11px] font-bold text-muted">COTE MOY.</div>
+              </div>
             </div>
           </div>
         </div>
@@ -146,12 +205,12 @@ export default function Home() {
           </div>
 
           {results.length > 0 ? (
-            <div className="space-y-2 flex-1">
+            <div className="space-y-2 flex-1" data-animate-group>
               {results.slice(0, 5).map((r) => {
                 const isWin = r.result === "Gagné";
                 const isPending = r.result === "En attente";
                 return (
-                  <div
+                  <SpotlightCard
                     key={r.id}
                     className="flex items-center justify-between bg-card border border-line/10 rounded-xl px-3 py-2"
                   >
@@ -182,7 +241,7 @@ export default function Home() {
                         </div>
                       )}
                     </div>
-                  </div>
+                  </SpotlightCard>
                 );
               })}
             </div>
@@ -194,23 +253,23 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-6">
-        <div className="bg-card border border-line/10 rounded-3xl p-6">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-6" data-animate-group>
+        <SpotlightCard className="rounded-3xl p-6">
           <h3 className="font-extrabold text-ink">Analyse Statistique</h3>
           <p className="text-sm text-muted mt-1">
             Modèle xG, efficience marché. On ne parie que si edge &gt; 3%.
           </p>
-        </div>
+        </SpotlightCard>
 
-        <div className="bg-card border border-line/10 rounded-3xl p-6">
+        <SpotlightCard className="rounded-3xl p-6">
           <h3 className="font-extrabold text-ink">Gestion Bankroll</h3>
           <p className="text-sm text-muted mt-1">Mises fixes 1-3 unités. Jamais de martingale.</p>
-        </div>
+        </SpotlightCard>
 
-        <div className="bg-card border border-line/10 rounded-3xl p-6">
+        <SpotlightCard className="rounded-3xl p-6">
           <h3 className="font-extrabold text-ink">Stratégie Long Terme</h3>
           <p className="text-sm text-muted mt-1">{total} paris archivés, transparence totale.</p>
-        </div>
+        </SpotlightCard>
       </div>
 
       <div className="flex justify-between items-end mt-8 sm:mt-10">
@@ -220,7 +279,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-4" data-animate-group>
         {analyses.length > 0 ? (
           analyses.map((a) => (
             <AnalysisCard
@@ -245,7 +304,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-4" data-animate-group>
         {picks.length > 0 ? (
           picks.map((p) => (
             <PickCard
@@ -264,7 +323,7 @@ export default function Home() {
         )}
       </div>
 
-      <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-3 sm:p-4 mt-6 sm:mt-8 text-xs sm:text-sm text-amber-700 dark:text-amber-200">
+      <div data-animate className="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-3 sm:p-4 mt-6 sm:mt-8 text-xs sm:text-sm text-amber-700 dark:text-amber-200">
         <b>⚠️ Jeu Responsable -18 ans :</b> Les paris comportent des risques. Aucun gain garanti.
         Joueurs-info-service.fr - 09 74 75 13 13
       </div>

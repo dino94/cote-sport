@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { useTheme } from "@/lib/theme-context";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import NotificationBell from "@/Components/NotificationBell";
 import PWAInstallButton from "@/Components/PWAInstallButton";
@@ -15,6 +15,9 @@ export default function Header() {
   const { session, isAdmin } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const router = useRouter();
+  const pathname = usePathname();
+  const isActive = (href: string) =>
+    !!pathname && (pathname === href || pathname.startsWith(`${href}/`));
 
   async function handleLogout() {
     await supabase.auth.signOut();
@@ -40,11 +43,11 @@ export default function Header() {
 
         {/* DESKTOP NAV */}
         <div className="hidden md:flex items-center gap-6 text-sm text-muted">
-          <Link href="/analyses" className="hover:text-ink transition">Analyses</Link>
-          <Link href="/pronostics" className="hover:text-ink transition">Pronostics</Link>
-          <Link href="/resultats" className="hover:text-ink transition">Résultats</Link>
-          <Link href="/contact" className="hover:text-ink transition">Contact</Link>
-          {isAdmin && <Link href="/admin" className="text-primary font-bold hover:opacity-80 transition">Admin</Link>}
+          <Link href="/analyses" aria-current={isActive("/analyses") ? "page" : undefined} className="nav-link px-3 py-2 hover:text-ink">Analyses</Link>
+          <Link href="/pronostics" aria-current={isActive("/pronostics") ? "page" : undefined} className="nav-link px-3 py-2 hover:text-ink">Pronostics</Link>
+          <Link href="/resultats" aria-current={isActive("/resultats") ? "page" : undefined} className="nav-link px-3 py-2 hover:text-ink">Résultats</Link>
+          <Link href="/contact" aria-current={isActive("/contact") ? "page" : undefined} className="nav-link px-3 py-2 hover:text-ink">Contact</Link>
+          {isAdmin && <Link href="/admin" aria-current={isActive("/admin") ? "page" : undefined} className="nav-link px-3 py-2 text-primary font-bold hover:opacity-80">Admin</Link>}
         </div>
 
         {/* DESKTOP RIGHT */}
@@ -74,7 +77,7 @@ export default function Header() {
               <Link href="/login" className="text-sm text-muted hover:text-ink transition font-bold">
                 Connexion
               </Link>
-              <Link href="/signup" className="text-sm bg-primary text-black font-black rounded-full px-5 py-2 hover:opacity-90 transition whitespace-nowrap">
+              <Link href="/signup" className="btn-premium text-sm bg-primary text-black font-black rounded-full px-5 py-2 hover:opacity-90 transition whitespace-nowrap">
                 Inscription
               </Link>
             </>
@@ -104,11 +107,11 @@ export default function Header() {
       {/* MOBILE MENU */}
       {open && (
         <div className="md:hidden bg-card border-t border-line/10 px-4 py-4 space-y-3 text-muted">
-          <Link href="/analyses" className="block hover:text-ink transition text-base py-1">Analyses</Link>
-          <Link href="/pronostics" className="block hover:text-ink transition text-base py-1">Pronostics</Link>
-          <Link href="/resultats" className="block hover:text-ink transition text-base py-1">Résultats</Link>
-          <Link href="/contact" className="block hover:text-ink transition text-base py-1">Contact</Link>
-          {isAdmin && <Link href="/admin" className="block text-primary font-bold hover:underline text-base py-1">Admin</Link>}
+          <Link href="/analyses" aria-current={isActive("/analyses") ? "page" : undefined} className="nav-link block px-3 py-2 hover:text-ink text-base">Analyses</Link>
+          <Link href="/pronostics" aria-current={isActive("/pronostics") ? "page" : undefined} className="nav-link block px-3 py-2 hover:text-ink text-base">Pronostics</Link>
+          <Link href="/resultats" aria-current={isActive("/resultats") ? "page" : undefined} className="nav-link block px-3 py-2 hover:text-ink text-base">Résultats</Link>
+          <Link href="/contact" aria-current={isActive("/contact") ? "page" : undefined} className="nav-link block px-3 py-2 hover:text-ink text-base">Contact</Link>
+          {isAdmin && <Link href="/admin" aria-current={isActive("/admin") ? "page" : undefined} className="nav-link block px-3 py-2 text-primary font-bold text-base">Admin</Link>}
 
           <div className="pt-3 border-t border-line/10 space-y-3">
             {session ? (

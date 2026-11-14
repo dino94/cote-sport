@@ -1,3 +1,5 @@
+import SpotlightCard from "@/Components/SpotlightCard";
+
 interface AnalysisCardProps {
   sport: string;
   compet: string;
@@ -16,7 +18,7 @@ export default function AnalysisCard({
   icon,
 }: AnalysisCardProps) {
   return (
-    <article className="bg-card border border-line/10 rounded-xl p-5 hover:border-primary/30 transition">
+    <SpotlightCard className="rounded-xl p-5">
       <div className="flex items-center gap-2 text-xs text-muted mb-2">
         <span className="text-lg">{icon}</span>
         <span className="font-bold">{sport}</span>
@@ -26,6 +28,6 @@ export default function AnalysisCard({
       <div className="text-xs text-muted mb-1">{date}</div>
       <h3 className="font-black text-lg text-ink">{title}</h3>
       <p className="text-sm text-muted mt-1">{resume}</p>
-    </article>
+    </SpotlightCard>
   );
 }
